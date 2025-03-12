@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+//implementacion de librerias para hacer llamadas a la api y leer los datos (retrofit y gson)
+    implementation (libs.squareup.retrofit)
+    implementation (libs.converter.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
