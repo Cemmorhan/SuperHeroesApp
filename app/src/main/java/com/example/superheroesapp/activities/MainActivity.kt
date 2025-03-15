@@ -1,5 +1,6 @@
 package com.example.superheroesapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -39,9 +40,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView = findViewById(R.id.recyclerView)
-        adapter = SuperheroAdapter(superheroList)
+
+        adapter = SuperheroAdapter(superheroList) { position ->
+            val superhero= superheroList[position]
+
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("SUPERHERO_ID", superhero.id)
+            startActivity(intent)
+        }
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 2)
+
         searchSuperheroesByName("a")
     }
 //creando el menu (no olvidar activar la de que se vea la barra en themes)
@@ -51,11 +61,10 @@ class MainActivity : AppCompatActivity() {
     val menuItem = menu?.findItem(R.id.action_search)
     val searchView = menuItem?.actionView as SearchView
     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?): Boolean {
-            searchSuperheroesByName(query ?: "")
-            return true
+        override fun onQueryTextSubmit(query: String): Boolean {
+            searchSuperheroesByName(query)
+            return false
         }
-
         override fun onQueryTextChange(query: String): Boolean {
             return false
         }
@@ -85,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
-                Log.e("ERROR", e.message.toString())
+                e.printStackTrace()
             }
         }
     }
