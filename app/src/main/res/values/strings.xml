@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Super Heroes App</string>
     <string name="action_search">Buscar super héroe</string>
+
+
+    <string name="action_biography">Biography</string>
+    <string name="action_appearance">Appearance</string>
+    <string name="action_stats">Stats</string>
+
 </resources>

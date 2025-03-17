@@ -1,5 +1,7 @@
 package com.example.superheroesapp.data
 
+import com.example.leagueofheroes.data.SuperHero
+import com.example.leagueofheroes.data.SuperHeroResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
