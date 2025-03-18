@@ -13,8 +13,10 @@ class SuperHero (
     val biography: Biography,
     val work: Work,
     val appearance: Appearance,
-    val image: Image
-)
+    val image: Image,
+    @SerializedName("powerstats") val stats: Powerstats
+) {
+}
 
 class Biography (
     val publisher: String,
@@ -45,4 +47,12 @@ class Appearance (
     }
 }
 
+class Powerstats (
+    val intelligence: String,
+    val strength: String,
+    val speed: String,
+    val durability: String,
+    val power: String,
+    val combat: String
+)
 class Image (val url: String)

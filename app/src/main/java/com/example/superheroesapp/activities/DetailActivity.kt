@@ -1,7 +1,9 @@
 package com.example.superheroesapp.activities
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.example.leagueofheroes.data.SuperHero
 import com.example.superheroesapp.R
 import com.example.superheroesapp.data.SuperheroService
 import com.example.superheroesapp.databinding.ActivityDetailBinding
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailActivity : AppCompatActivity() {
-
+    lateinit var progressBar: LinearProgressIndicator
     lateinit var binding: ActivityDetailBinding
     lateinit var superhero: SuperHero
 
@@ -38,6 +41,7 @@ class DetailActivity : AppCompatActivity() {
         val id = intent.getStringExtra("SUPERHERO_ID")!!
         getSuperheroById(id)
 
+
         binding.navigationBar.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_biography -> {
@@ -45,11 +49,13 @@ class DetailActivity : AppCompatActivity() {
                     binding.statsContent.root.visibility = View.GONE
                     binding.biographyContent.root.visibility = View.VISIBLE
                 }
+
                 R.id.action_appearance -> {
                     binding.statsContent.root.visibility = View.GONE
                     binding.biographyContent.root.visibility = View.GONE
                     binding.appearanceContent.root.visibility = View.VISIBLE
                 }
+
                 R.id.action_stats -> {
                     binding.biographyContent.root.visibility = View.GONE
                     binding.appearanceContent.root.visibility = View.GONE
@@ -62,6 +68,18 @@ class DetailActivity : AppCompatActivity() {
         binding.navigationBar.selectedItemId = R.id.action_biography
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            //dar funcion a la flecha de atras
+            android.R.id.home -> {
+                finish()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     fun getRetrofit(): SuperheroService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.superheroapi.com/api/dbc2e43ab98b528a958fda749b830fa3/")
@@ -72,6 +90,8 @@ class DetailActivity : AppCompatActivity() {
 
     private fun loadData() {
         Picasso.get().load(superhero.image.url).into(binding.pictureImageView)
+        //inicializar la barra de carga
+        progressBar = findViewById(R.id.progressBar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = superhero.name
@@ -94,6 +114,25 @@ class DetailActivity : AppCompatActivity() {
         binding.appearanceContent.heightTextView.text = superhero.appearance.getHeightCm()
 
         // Stats
+        binding.statsContent.inteligenceTextView.text = superhero.stats.intelligence
+        binding.statsContent.stretchTextView.text = superhero.stats.strength
+        binding.statsContent.speedTextView.text = superhero.stats.speed
+        binding.statsContent.durabilityTextView.text = superhero.stats.durability
+        binding.statsContent.powerTextView.text = superhero.stats.power
+        binding.statsContent.combatTextView.text = superhero.stats.combat
+
+        //falta hacer la comprobación del null
+
+        binding.statsContent.intelligenceProgressBar.progress = superhero.stats.intelligence.toInt()
+        binding.statsContent.strengthProgressBar.progress = superhero.stats.strength.toInt()
+        binding.statsContent.speedProgressBar.progress = superhero.stats.speed.toInt()
+        binding.statsContent.durabilityProgressBar.progress = superhero.stats.durability.toInt()
+        binding.statsContent.powerProgressBar.progress = superhero.stats.power.toInt()
+        binding.statsContent.combatProgressBar.progress = superhero.stats.combat.toInt()
+
+        //quitar barra de carga
+        progressBar.visibility = ProgressBar.GONE
+
     }
 
     fun getSuperheroById(id: String) {
@@ -105,7 +144,7 @@ class DetailActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.Main).launch {
                     loadData()
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }

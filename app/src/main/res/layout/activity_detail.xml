@@ -37,6 +37,11 @@ app:layout_constraintTop_toBottomOf="@id/pictureImageView">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_activity_detail_navigation"/>
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
 
     <include
         android:id="@+id/biographyContent"
