@@ -9,15 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginEnd="20dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Intelligence:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/inteligenceTextView"
             android:layout_width="0dp"
@@ -44,7 +43,7 @@
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Strength:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/stretchTextView"
             android:layout_width="0dp"
@@ -72,7 +71,7 @@
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Speed:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/speedTextView"
             android:layout_width="0dp"
@@ -100,7 +99,7 @@
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Durability:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/durabilityTextView"
             android:layout_width="0dp"
@@ -128,7 +127,7 @@
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Power:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/powerTextView"
             android:layout_width="0dp"
@@ -156,7 +155,7 @@
             android:layout_weight="5"
             android:textAlignment="textEnd"
             android:text="Combat:"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/combatTextView"
             android:layout_width="0dp"
