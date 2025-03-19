@@ -116,6 +116,17 @@ class DetailActivity : AppCompatActivity() {
         binding.appearanceContent.heightTextView.text = superhero.appearance.getHeightCm()
 
         // Stats
+        /*
+        con with nos ahorramos poner superhero.stats muchas veces porque estamos dentro de stats. (no dentro del detailActivity)
+        with (superhero.stats) {
+            binding.statsContent.inteligenceTextView.text = intelligence
+            binding.statsContent.stretchTextView.text = strength
+            binding.statsContent.speedTextView.text = speed
+            binding.statsContent.durabilityTextView.text = durability
+            binding.statsContent.powerTextView.text = power
+            binding.statsContent.combatTextView.text = combat
+         */
+
         binding.statsContent.inteligenceTextView.text = "${tryConvertToInt(superhero.stats.intelligence)}"
         binding.statsContent.stretchTextView.text = "${tryConvertToInt(superhero.stats.strength)}"
         binding.statsContent.speedTextView.text = "${tryConvertToInt(superhero.stats.speed)}"
@@ -148,9 +159,9 @@ class DetailActivity : AppCompatActivity() {
     fun changeColorProgressBar(progressBar: ProgressBar, value: Int) {
         when (value) {
             0 -> progressBar.progressTintList = getColorStateList(R.color.gris)
-            in 1..24 -> progressBar.progressTintList = getColorStateList(R.color.red)
-            in 25..75 -> progressBar.progressTintList = getColorStateList(R.color.yellow)
-            in 75..100 -> progressBar.progressTintList = getColorStateList(R.color.green)
+            in 1..33 -> progressBar.progressTintList = getColorStateList(R.color.red)
+            in 34..66 -> progressBar.progressTintList = getColorStateList(R.color.yellow)
+            in 67..100 -> progressBar.progressTintList = getColorStateList(R.color.green)
         }
     }
     fun tryConvertToInt(valor: String): Int {

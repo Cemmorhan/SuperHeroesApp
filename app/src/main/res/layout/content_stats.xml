@@ -19,6 +19,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/inteligenceTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -46,6 +48,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/stretchTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -74,6 +78,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/speedTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -102,6 +108,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/durabilityTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -130,6 +138,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/powerTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -158,6 +168,8 @@
             android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/combatTextView"
+            android:paddingEnd="5dp"
+            android:textAlignment="textEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

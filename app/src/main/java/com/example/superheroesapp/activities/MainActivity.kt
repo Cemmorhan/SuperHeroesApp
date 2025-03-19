@@ -65,10 +65,11 @@ class MainActivity : AppCompatActivity() {
     val searchView = menuItem?.actionView as SearchView
     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean {
-            searchSuperheroesByName(query)
             return false
         }
         override fun onQueryTextChange(query: String): Boolean {
+            searchSuperheroesByName(query)
+
             return false
         }
     })
