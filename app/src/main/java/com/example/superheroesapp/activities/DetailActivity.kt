@@ -26,6 +26,8 @@ class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding
     lateinit var superhero: SuperHero
 
+    lateinit var intelligence: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -114,25 +116,49 @@ class DetailActivity : AppCompatActivity() {
         binding.appearanceContent.heightTextView.text = superhero.appearance.getHeightCm()
 
         // Stats
-        binding.statsContent.inteligenceTextView.text = superhero.stats.intelligence
-        binding.statsContent.stretchTextView.text = superhero.stats.strength
-        binding.statsContent.speedTextView.text = superhero.stats.speed
-        binding.statsContent.durabilityTextView.text = superhero.stats.durability
-        binding.statsContent.powerTextView.text = superhero.stats.power
-        binding.statsContent.combatTextView.text = superhero.stats.combat
+        binding.statsContent.inteligenceTextView.text = "${tryConvertToInt(superhero.stats.intelligence)}"
+        binding.statsContent.stretchTextView.text = "${tryConvertToInt(superhero.stats.strength)}"
+        binding.statsContent.speedTextView.text = "${tryConvertToInt(superhero.stats.speed)}"
+        binding.statsContent.durabilityTextView.text = "${tryConvertToInt(superhero.stats.durability)}"
+        binding.statsContent.powerTextView.text = "${tryConvertToInt(superhero.stats.power)}"
+        binding.statsContent.combatTextView.text = "${tryConvertToInt(superhero.stats.combat)}"
 
-        //falta hacer la comprobación del null
+        //Con comprobación anti nulls
 
-        binding.statsContent.intelligenceProgressBar.progress = superhero.stats.intelligence.toInt()
-        binding.statsContent.strengthProgressBar.progress = superhero.stats.strength.toInt()
-        binding.statsContent.speedProgressBar.progress = superhero.stats.speed.toInt()
-        binding.statsContent.durabilityProgressBar.progress = superhero.stats.durability.toInt()
-        binding.statsContent.powerProgressBar.progress = superhero.stats.power.toInt()
-        binding.statsContent.combatProgressBar.progress = superhero.stats.combat.toInt()
+        binding.statsContent.intelligenceProgressBar.progress = superhero.stats.intelligence.toIntOrNull() ?: 0
+        binding.statsContent.strengthProgressBar.progress = superhero.stats.strength.toIntOrNull() ?: 0
+        binding.statsContent.speedProgressBar.progress = superhero.stats.speed.toIntOrNull() ?: 0
+        binding.statsContent.durabilityProgressBar.progress = superhero.stats.durability.toIntOrNull() ?: 0
+        binding.statsContent.powerProgressBar.progress = superhero.stats.power.toIntOrNull() ?: 0
+        binding.statsContent.combatProgressBar.progress = superhero.stats.combat.toIntOrNull() ?: 0
+
+        //control de color de la barra de stats
+        changeColorProgressBar(binding.statsContent.intelligenceProgressBar, tryConvertToInt(superhero.stats.intelligence))
+        changeColorProgressBar(binding.statsContent.strengthProgressBar, tryConvertToInt(superhero.stats.strength))
+        changeColorProgressBar(binding.statsContent.speedProgressBar, tryConvertToInt(superhero.stats.speed))
+        changeColorProgressBar(binding.statsContent.durabilityProgressBar, tryConvertToInt(superhero.stats.durability))
+        changeColorProgressBar(binding.statsContent.powerProgressBar, tryConvertToInt(superhero.stats.power))
+        changeColorProgressBar(binding.statsContent.combatProgressBar, tryConvertToInt(superhero.stats.combat))
+
 
         //quitar barra de carga
         progressBar.visibility = ProgressBar.GONE
 
+    }
+    fun changeColorProgressBar(progressBar: ProgressBar, value: Int) {
+        when (value) {
+            0 -> progressBar.progressTintList = getColorStateList(R.color.gris)
+            in 1..24 -> progressBar.progressTintList = getColorStateList(R.color.red)
+            in 25..75 -> progressBar.progressTintList = getColorStateList(R.color.yellow)
+            in 75..100 -> progressBar.progressTintList = getColorStateList(R.color.green)
+        }
+    }
+    fun tryConvertToInt(valor: String): Int {
+        try {
+            return valor.toInt()
+        } catch (e: Exception) {
+            return 0
+        }
     }
 
     fun getSuperheroById(id: String) {
