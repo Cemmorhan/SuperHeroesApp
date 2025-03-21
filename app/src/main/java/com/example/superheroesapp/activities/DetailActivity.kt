@@ -26,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding
     lateinit var superhero: SuperHero
 
-    lateinit var intelligence: String
+    private var isShowingCardFront = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +42,11 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra("SUPERHERO_ID")!!
         getSuperheroById(id)
+
+        binding.cardView.setOnClickListener {
+            rotateCard()
+        }
+        binding.backCardLayout.visibility = View.GONE
 
 
         binding.navigationBar.setOnItemSelectedListener { menuItem ->
@@ -171,6 +176,33 @@ class DetailActivity : AppCompatActivity() {
             return 0
         }
     }
+
+    fun rotateCard() {
+        binding.cardView.animate()
+            .rotationY(90f)
+            .setDuration(300)
+            .setInterpolator(android.view.animation.DecelerateInterpolator())
+            .setListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    if (isShowingCardFront) {
+                        binding.frontCardLayout.visibility = View.GONE
+                        binding.backCardLayout.visibility = View.VISIBLE
+                    } else {
+                        binding.backCardLayout.visibility = View.GONE
+                        binding.frontCardLayout.visibility = View.VISIBLE
+                    }
+                    isShowingCardFront = !isShowingCardFront
+                    binding.cardView.rotationY = -90f
+                    binding.cardView.animate()
+                        .rotationY(0f)
+                        .setDuration(300)
+                        .setInterpolator(android.view.animation.DecelerateInterpolator())
+                        .setListener(null)
+                }
+            })
+    }
+
+
 
     fun getSuperheroById(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
